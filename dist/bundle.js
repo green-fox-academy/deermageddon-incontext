@@ -55,10 +55,13 @@
 
 	var _fetch_hints = __webpack_require__(2);
 
-	__webpack_require__(3).polyfill();
-	__webpack_require__(8);
+	var _switch = __webpack_require__(3);
+
+	__webpack_require__(4).polyfill();
+	__webpack_require__(9);
 
 	(0, _fetch_hints.teszt)();
+	(0, _switch.initialize)();
 
 /***/ },
 /* 2 */
@@ -76,6 +79,36 @@
 
 /***/ },
 /* 3 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.initialize = initialize;
+	function initialize() {
+	  var div = document.createElement("div");
+	  var btn_on = document.createElement("BUTTON");
+	  var btn_off = document.createElement("BUTTON");
+	  var t = document.createTextNode("On");
+	  var u = document.createTextNode("Off");
+	  div.appendChild(btn_on);
+	  div.appendChild(btn_off);
+	  btn_on.appendChild(t);
+	  btn_off.appendChild(u);
+	  document.body.appendChild(div);
+
+	  btn_on.addEventListener('click', function () {
+	    var baseElement = document.querySelector("body");
+	    baseElement.classList.add("something");
+	  });
+
+	  btn_off.addEventListener('click', function () {});
+	}
+
+/***/ },
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
@@ -208,7 +241,7 @@
 	    function lib$es6$promise$asap$$attemptVertx() {
 	      try {
 	        var r = require;
-	        var vertx = __webpack_require__(6);
+	        var vertx = __webpack_require__(7);
 	        lib$es6$promise$asap$$vertxNext = vertx.runOnLoop || vertx.runOnContext;
 	        return lib$es6$promise$asap$$useVertxTimer();
 	      } catch(e) {
@@ -1021,7 +1054,7 @@
 	    };
 
 	    /* global define:true module:true window: true */
-	    if ("function" === 'function' && __webpack_require__(7)['amd']) {
+	    if ("function" === 'function' && __webpack_require__(8)['amd']) {
 	      !(__WEBPACK_AMD_DEFINE_RESULT__ = function() { return lib$es6$promise$umd$$ES6Promise; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof module !== 'undefined' && module['exports']) {
 	      module['exports'] = lib$es6$promise$umd$$ES6Promise;
@@ -1033,10 +1066,10 @@
 	}).call(this);
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), (function() { return this; }()), __webpack_require__(5)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), (function() { return this; }()), __webpack_require__(6)(module)))
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -1133,7 +1166,7 @@
 
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -1149,32 +1182,32 @@
 
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = function() { throw new Error("define cannot be used indirect"); };
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// the whatwg-fetch polyfill installs the fetch() function
 	// on the global object (window or self)
 	//
 	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(9);
+	__webpack_require__(10);
 	module.exports = self.fetch.bind(self);
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	(function(self) {
