@@ -55,10 +55,14 @@
 
 	var _fetch_hints = __webpack_require__(2);
 
-	__webpack_require__(3).polyfill();
-	__webpack_require__(8);
+	var _switch = __webpack_require__(3);
+
+	__webpack_require__(4).polyfill();
+	__webpack_require__(9);
 
 	(0, _fetch_hints.placeHints)();
+
+	(0, _switch.initialize)();
 
 /***/ },
 /* 2 */
@@ -136,6 +140,49 @@
 
 /***/ },
 /* 3 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.initialize = initialize;
+	function initialize() {
+	  var baseElement = document.querySelector("body");
+	  var div = document.createElement("div");
+	  div.classList.add("switch");
+	  var in_div = document.createElement("div");
+	  in_div.classList.add("onoffswitch");
+	  var checkbox = document.createElement("input");
+	  checkbox.type = "checkbox";
+	  checkbox.classList.add("onoffswitch-checkbox");
+	  checkbox.id = "example1";
+	  var label = document.createElement("label");
+	  label.classList.add("onoffswitch-label");
+	  label.htmlFor = "example1";
+	  var span_inner = document.createElement("span");
+	  span_inner.classList.add("onoffswitch-inner");
+	  var span_switch = document.createElement("span");
+	  span_switch.classList.add("onoffswitch-switch");
+	  div.appendChild(in_div);
+	  in_div.appendChild(checkbox);
+	  in_div.appendChild(label);
+	  label.appendChild(span_inner);
+	  label.appendChild(span_switch);
+	  document.body.appendChild(div);
+
+	  span_inner.addEventListener('click', function () {
+	    baseElement.classList.add("something");
+	  });
+
+	  span_switch.addEventListener('click', function () {
+	    baseElement.classList.remove("something");
+	  });
+	}
+
+/***/ },
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
@@ -268,7 +315,7 @@
 	    function lib$es6$promise$asap$$attemptVertx() {
 	      try {
 	        var r = require;
-	        var vertx = __webpack_require__(6);
+	        var vertx = __webpack_require__(7);
 	        lib$es6$promise$asap$$vertxNext = vertx.runOnLoop || vertx.runOnContext;
 	        return lib$es6$promise$asap$$useVertxTimer();
 	      } catch(e) {
@@ -1081,7 +1128,7 @@
 	    };
 
 	    /* global define:true module:true window: true */
-	    if ("function" === 'function' && __webpack_require__(7)['amd']) {
+	    if ("function" === 'function' && __webpack_require__(8)['amd']) {
 	      !(__WEBPACK_AMD_DEFINE_RESULT__ = function() { return lib$es6$promise$umd$$ES6Promise; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof module !== 'undefined' && module['exports']) {
 	      module['exports'] = lib$es6$promise$umd$$ES6Promise;
@@ -1093,10 +1140,10 @@
 	}).call(this);
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), (function() { return this; }()), __webpack_require__(5)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), (function() { return this; }()), __webpack_require__(6)(module)))
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -1193,7 +1240,7 @@
 
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -1209,32 +1256,32 @@
 
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = function() { throw new Error("define cannot be used indirect"); };
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// the whatwg-fetch polyfill installs the fetch() function
 	// on the global object (window or self)
 	//
 	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(9);
+	__webpack_require__(10);
 	module.exports = self.fetch.bind(self);
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	(function(self) {
