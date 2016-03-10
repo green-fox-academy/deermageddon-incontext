@@ -1,5 +1,8 @@
-/* TOOGLE SWICH */
-
+label {
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
 .onoffswitch {
   position: relative;
   width: 64px;
@@ -16,7 +19,7 @@
   display: block;
   overflow: hidden;
   cursor: pointer;
-  border: 2px solid $navy;
+  border: 2px solid #1AB394;
   border-radius: 2px;
 }
 
@@ -27,6 +30,7 @@
   -webkit-transition: margin 0.3s ease-in 0s;
   -o-transition: margin 0.3s ease-in 0s;
   transition: margin 0.3s ease-in 0s;
+  display: block;
 }
 
 .onoffswitch-inner:before, .onoffswitch-inner:after {
@@ -47,15 +51,15 @@
 .onoffswitch-inner:before {
   content: "ON";
   padding-left: 10px;
-  background-color: $navy;
+  background-color: #1AB394;
   color: #FFFFFF;
 }
 
 .onoffswitch-inner:after {
   content: "OFF";
   padding-right: 10px;
-  background-color: #FFFFFF;
-  color: #999999;
+  background-color: #1AB394;
+  color: #000000;
   text-align: right;
 }
 
@@ -63,7 +67,7 @@
   width: 20px;
   margin: 0;
   background: #FFFFFF;
-  border: 2px solid $navy;
+  border: 2px solid #1AB394;
   border-radius: 2px;
   position: absolute;
   top: 0;
@@ -73,6 +77,37 @@
   -webkit-transition: all 0.3s ease-in 0s;
   -o-transition: all 0.3s ease-in 0s;
   transition: all 0.3s ease-in 0s;
+}
+
+.onoffswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #1AB394;
+  border-radius: 3px;
+}
+
+.onoffswitch-switch {
+  display: block;
+  width: 18px;
+  margin: 0;
+  background: #FFFFFF;
+  border: 2px solid #1AB394;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 36px;
+  -moz-transition: all 0.3s ease-in 0s;
+  -webkit-transition: all 0.3s ease-in 0s;
+  -o-transition: all 0.3s ease-in 0s;
+  transition: all 0.3s ease-in 0s;
+}
+
+.switch {
+  position: absolute;
+  bottom: 0;
+  right:10px;
 }
 
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
