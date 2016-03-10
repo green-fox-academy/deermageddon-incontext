@@ -76,7 +76,12 @@
 
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	exports.placeHints = placeHints;
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 	function placeHints() {
 	  var target_url = document.location.pathname;
 	  var source = "http://localhost:3000/hints";
@@ -88,55 +93,78 @@
 	  }).catch(function (err) {
 	    console.log(err);
 	  }).then(function (j) {
-	    // var target_selector = j
-	    // console.log(target_selector);
-	    var hint_container = document.createElement("div");
-
-	    hint_container.addEventListener('click', function () {
-	      if (event.target.className === 'throb-heart') {
-	        // var delID = event.target.getAttribute('id');
-
-	        event.target.classList.add('visible');
-	        // console.log('it works');
-	      } else if (event.target.className === 'text-box-close') {
-	          event.target.parentNode.previousElementSibling.classList.remove('visible');
-	          // event.target.classList.remove('visible')
-	        }
-	    });
-
-	    for (var i = 0; i < j.length; i++) {
-	      var pulsate_parent = document.createElement("div");
-	      pulsate_parent.setAttribute("id", "pulsate-parent" + i);
-	      pulsate_parent.setAttribute("class", "pulsate-parent");
-
-	      var _calcParentPos = calcParentPos(j[i].target_selector);
-
-	      var _calcParentPos2 = _slicedToArray(_calcParentPos, 2);
-
-	      var left = _calcParentPos2[0];
-	      var top = _calcParentPos2[1];
-
-	      console.log(left);
-	      pulsate_parent.setAttribute("style", "left:" + left + "px; top:" + top + "px;");
-	      pulsate_parent.innerHTML = "<div class=\"throbber\"></div>\n                                  <div class=\"throb-heart\"></div>\n                                  <div class=\"text-box\">\n                                    <div class=\"text-box-close\">X</div>\n                                    " + j[i].hint + "\n                                  </div>";
-
-	      var text_box = document.createElement("div");
-	      text_box.setAttribute("class", "pulsate-parent");
-	      text_box.textContent = j[i].hint;
-
-	      hint_container.appendChild(pulsate_parent);
-	    }
-
-	    document.body.appendChild(hint_container);
+	    var helpPoints = new HelpPoints(j);
+	    helpPoints.create();
+	    helpPoints.render();
 	  });
-
-	  function calcParentPos(selector) {
-	    var hint_pos = document.querySelector(selector).getBoundingClientRect();
-	    var left = hint_pos.left + window.scrollX + hint_pos.width;
-	    var top = hint_pos.top + window.scrollY; //+ 10
-	    return [left, top];
-	  }
 	}
+
+	var HelpPoints = function () {
+	  function HelpPoints(hint_obj) {
+	    _classCallCheck(this, HelpPoints);
+
+	    this.hint_obj = hint_obj;
+	    this.hint_container = document.createElement("div");
+	  }
+
+	  _createClass(HelpPoints, [{
+	    key: "create",
+	    value: function create() {
+	      document.body.appendChild(this.hint_container);
+	      this._listen();
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      this.hint_container.innerHTML = "";
+	      this._createHelpPoints();
+	    }
+	  }, {
+	    key: "_listen",
+	    value: function _listen() {
+	      this.hint_container.addEventListener('click', function () {
+	        if (event.target.className === 'throb-heart') {
+	          event.target.classList.add('visible');
+	        } else if (event.target.className === 'text-box-close') {
+	          event.target.parentNode.previousElementSibling.classList.remove('visible');
+	        }
+	      });
+	    }
+	  }, {
+	    key: "_createHelpPoints",
+	    value: function _createHelpPoints() {
+	      for (var i = 0; i < this.hint_obj.length; i++) {
+	        var pulsate_parent = document.createElement("div");
+	        pulsate_parent.setAttribute("id", "pulsate-parent" + i);
+	        pulsate_parent.setAttribute("class", "pulsate-parent");
+
+	        var _calcParentPos2 = this._calcParentPos(this.hint_obj[i].target_selector);
+
+	        var _calcParentPos3 = _slicedToArray(_calcParentPos2, 2);
+
+	        var left = _calcParentPos3[0];
+	        var top = _calcParentPos3[1];
+
+	        pulsate_parent.setAttribute("style", "left:" + left + "px; top:" + top + "px;");
+	        pulsate_parent.innerHTML = "<div class=\"throbber\"></div>\n                                  <div class=\"throb-heart\"></div>\n                                  <div class=\"text-box\">\n                                    <div class=\"text-box-close\">X</div>\n                                    " + this.hint_obj[i].hint + "\n                                  </div>";
+
+	        var text_box = document.createElement("div");
+	        text_box.setAttribute("class", "pulsate-parent");
+	        this.hint_container.appendChild(pulsate_parent);
+	      }
+	    }
+	  }, {
+	    key: "_calcParentPos",
+	    value: function _calcParentPos(selector) {
+	      var hint_pos = document.querySelector(selector).getBoundingClientRect();
+	      var left = hint_pos.left + window.scrollX + hint_pos.width;
+	      var top = hint_pos.top + window.scrollY; //+ 10
+	      return [left, top];
+	    }
+	  }]);
+
+	  return HelpPoints;
+	}();
 
 /***/ },
 /* 3 */

@@ -9,53 +9,64 @@ export function placeHints() {
   }).catch(function(err) {
     console.log(err);
   }).then(function (j) {
-    // var target_selector = j
-    // console.log(target_selector);
-    var hint_container = document.createElement("div");
+    let helpPoints = new HelpPoints(j)
+    helpPoints.create()
+    helpPoints.render()
+  })
+}
 
-    hint_container.addEventListener('click', function () {
+class HelpPoints {
+
+  constructor(hint_obj){
+    this.hint_obj = hint_obj
+    this.hint_container = document.createElement("div");
+  }
+
+  create(){
+    document.body.appendChild(this.hint_container)
+    this._listen()
+  }
+
+  render(){
+    this.hint_container.innerHTML = ""
+    this._createHelpPoints()
+  }
+
+  _listen(){
+    this.hint_container.addEventListener('click', function () {
       if (event.target.className === 'throb-heart') {
-      // var delID = event.target.getAttribute('id');
-
-      event.target.classList.add('visible')
-      // console.log('it works');
-    }else if (event.target.className === 'text-box-close') {
-      event.target.parentNode.previousElementSibling.classList.remove('visible')
-      // event.target.classList.remove('visible')
-    }
+        event.target.classList.add('visible')
+      }else if (event.target.className === 'text-box-close') {
+        event.target.parentNode.previousElementSibling.classList.remove('visible')
+      }
     })
+  }
 
-    for (let i = 0; i < j.length; i++) {
-      var pulsate_parent = document.createElement("div")
+  _createHelpPoints(){
+    for (let i = 0; i < this.hint_obj.length; i++) {
+      let pulsate_parent = document.createElement("div")
       pulsate_parent.setAttribute("id", `pulsate-parent${i}`);
       pulsate_parent.setAttribute("class", "pulsate-parent");
 
-      var [left, top] = calcParentPos(j[i].target_selector)
-      console.log(left)
+      let [left, top] = this._calcParentPos(this.hint_obj[i].target_selector)
       pulsate_parent.setAttribute("style", `left:${left}px; top:${top}px;`);
       pulsate_parent.innerHTML = `<div class="throbber"></div>
                                   <div class="throb-heart"></div>
                                   <div class="text-box">
                                     <div class="text-box-close">X</div>
-                                    ${j[i].hint}
+                                    ${this.hint_obj[i].hint}
                                   </div>`
 
-      var text_box = document.createElement("div")
+      let text_box = document.createElement("div")
       text_box.setAttribute("class", "pulsate-parent");
-      text_box.textContent = j[i].hint
-
-      hint_container.appendChild(pulsate_parent)
+      this.hint_container.appendChild(pulsate_parent)
     }
-
-    document.body.appendChild(hint_container)
-
-  });
-
-  function calcParentPos(selector) {
-    var hint_pos = document.querySelector(selector).getBoundingClientRect()
-    var left = hint_pos.left + window.scrollX + hint_pos.width
-    var top = hint_pos.top + window.scrollY//+ 10
-    return [left, top]
   }
 
+  _calcParentPos(selector){
+    let hint_pos = document.querySelector(selector).getBoundingClientRect()
+    let left = hint_pos.left + window.scrollX + hint_pos.width
+    let top = hint_pos.top + window.scrollY//+ 10
+    return [left, top]
+  }
 }
