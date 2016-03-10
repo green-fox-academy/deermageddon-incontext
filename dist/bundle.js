@@ -58,20 +58,80 @@
 	__webpack_require__(3).polyfill();
 	__webpack_require__(8);
 
-	(0, _fetch_hints.teszt)();
+	(0, _fetch_hints.placeHints)();
 
 /***/ },
 /* 2 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.teszt = teszt;
-	function teszt() {
-	  console.log('it works');
+
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+	exports.placeHints = placeHints;
+	function placeHints() {
+	  var target_url = document.location.pathname;
+	  var source = "http://localhost:3000/hints";
+	  fetch(source + "?target_url=" + target_url, {
+	    method: 'get'
+	    // mode: 'no-cors'
+	  }).then(function (response) {
+	    return response.json();
+	  }).catch(function (err) {
+	    console.log(err);
+	  }).then(function (j) {
+	    // var target_selector = j
+	    // console.log(target_selector);
+	    var hint_container = document.createElement("div");
+
+	    hint_container.addEventListener('click', function () {
+	      if (event.target.className === 'throb-heart') {
+	        // var delID = event.target.getAttribute('id');
+
+	        event.target.classList.add('visible');
+	        // console.log('it works');
+	      } else if (event.target.className === 'text-box-close') {
+	          event.target.parentNode.previousElementSibling.classList.remove('visible');
+	          // event.target.classList.remove('visible')
+	        }
+	    });
+
+	    for (var i = 0; i < j.length; i++) {
+	      var pulsate_parent = document.createElement("div");
+	      pulsate_parent.setAttribute("id", "pulsate-parent" + i);
+	      pulsate_parent.setAttribute("class", "pulsate-parent");
+
+	      var _calcParentPos = calcParentPos(j[i].target_selector);
+
+	      var _calcParentPos2 = _slicedToArray(_calcParentPos, 2);
+
+	      var left = _calcParentPos2[0];
+	      var top = _calcParentPos2[1];
+
+	      console.log(left);
+	      pulsate_parent.setAttribute("style", "left:" + left + "px; top:" + top + "px;");
+	      pulsate_parent.innerHTML = "<div class=\"throbber\"></div>\n                                  <div class=\"throb-heart\"></div>\n                                  <div class=\"text-box\">\n                                    <div class=\"text-box-close\">X</div>\n                                    " + j[i].hint + "\n                                  </div>";
+
+	      var text_box = document.createElement("div");
+	      text_box.setAttribute("class", "pulsate-parent");
+	      text_box.textContent = j[i].hint;
+
+	      hint_container.appendChild(pulsate_parent);
+	    }
+
+	    document.body.appendChild(hint_container);
+	  });
+
+	  function calcParentPos(selector) {
+	    var hint_pos = document.querySelector(selector).getBoundingClientRect();
+	    var left = hint_pos.left + window.scrollX + hint_pos.width;
+	    var top = hint_pos.top + window.scrollY; //+ 10
+	    return [left, top];
+	  }
 	}
 
 /***/ },
