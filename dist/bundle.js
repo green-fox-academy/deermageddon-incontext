@@ -91,12 +91,12 @@
 	    // mode: 'no-cors'
 	  }).then(function (response) {
 	    return response.json();
-	  }).catch(function (err) {
-	    console.log(err);
 	  }).then(function (j) {
 	    var helpPoints = new HelpPoints(j);
 	    helpPoints.create();
 	    helpPoints.render();
+	  }).catch(function (err) {
+	    console.log(err);
 	  });
 	}
 
