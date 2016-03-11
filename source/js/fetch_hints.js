@@ -1,5 +1,5 @@
 export function placeHints() {
-  var source = "http://localhost:3000/hints"
+  var source = "http://deermageddon.herokuapp.com/hints"
   var target_url = document.location.pathname
 
   fetch(`${source}?target_url=${target_url}`, {

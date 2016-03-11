@@ -83,7 +83,7 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function placeHints() {
-	  var source = "http://localhost:3000/hints";
+	  var source = "http://deermageddon.herokuapp.com/hints";
 	  var target_url = document.location.pathname;
 
 	  fetch(source + "?target_url=" + target_url, {
