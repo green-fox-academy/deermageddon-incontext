@@ -1,12 +1,13 @@
-#hint-container {
-  position: absolute;
-}
-
-.something #hint-container{
+#hint-container{
   display: none;
 }
 
+body.enable-help #hint-container{
+  display: block;
+}
+
 .pulsate-parent {
+  /*display: none;*/
   position: absolute;
   /*display: inline-block;*/
   width: 40px;

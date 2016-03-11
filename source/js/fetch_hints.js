@@ -1,6 +1,7 @@
 export function placeHints() {
-  var target_url = document.location.pathname
   var source = "http://localhost:3000/hints"
+  var target_url = document.location.pathname
+
   fetch(`${source}?target_url=${target_url}`, {
 	method: 'get'
   // mode: 'no-cors'
@@ -23,6 +24,7 @@ class HelpPoints {
   }
 
   create(){
+    this.hint_container.setAttribute('id', 'hint-container')
     document.body.appendChild(this.hint_container)
     this._listen()
   }

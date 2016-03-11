@@ -83,8 +83,9 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function placeHints() {
-	  var target_url = document.location.pathname;
 	  var source = "http://localhost:3000/hints";
+	  var target_url = document.location.pathname;
+
 	  fetch(source + "?target_url=" + target_url, {
 	    method: 'get'
 	    // mode: 'no-cors'
@@ -110,6 +111,7 @@
 	  _createClass(HelpPoints, [{
 	    key: "create",
 	    value: function create() {
+	      this.hint_container.setAttribute('id', 'hint-container');
 	      document.body.appendChild(this.hint_container);
 	      this._listen();
 	    }
@@ -200,12 +202,8 @@
 	  label.appendChild(span_switch);
 	  document.body.appendChild(div);
 
-	  span_inner.addEventListener('click', function () {
-	    baseElement.classList.add("something");
-	  });
-
-	  span_switch.addEventListener('click', function () {
-	    baseElement.classList.remove("something");
+	  checkbox.addEventListener('change', function () {
+	    baseElement.classList.toggle("enable-help");
 	  });
 	}
 

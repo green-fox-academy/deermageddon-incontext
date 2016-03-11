@@ -24,12 +24,7 @@ export function initialize() {
   label.appendChild(span_switch);
   document.body.appendChild(div);
 
-  span_inner.addEventListener('click', function() {
-    baseElement.classList.add("something");
+  checkbox.addEventListener('change', function() {
+    baseElement.classList.toggle("enable-help");
   })
-
-  span_switch.addEventListener('click', function() {
-    baseElement.classList.remove("something");
-  })
-
 }
