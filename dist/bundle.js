@@ -148,7 +148,7 @@
 	        var top = _calcParentPos3[1];
 
 	        pulsate_parent.setAttribute("style", "left:" + left + "px; top:" + top + "px;");
-	        pulsate_parent.innerHTML = "<div class=\"throbber\"></div>\n                                  <div class=\"throb-heart\"></div>\n                                  <div class=\"text-box\">\n                                    <div class=\"text-box-close\">X</div>\n                                    " + this.hint_obj[i].hint + "\n                                  </div>";
+	        pulsate_parent.innerHTML = "<div class=\"throbber\"></div>\n                                  <div class=\"throb-heart\"></div>\n                                  <div class=\"text-box\">\n                                    <div class=\"text-box-close\">X</div>\n                                    <p>" + this.hint_obj[i].hint + "</p>\n                                    <p><a href=\"http://deermageddon.herokuapp.com/articles/" + this.hint_obj[i].id + "\">Read more...</a></p>\n                                  </div>";
 
 	        var text_box = document.createElement("div");
 	        text_box.setAttribute("class", "pulsate-parent");
