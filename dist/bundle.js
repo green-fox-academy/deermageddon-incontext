@@ -53,7 +53,7 @@
 
 	'use strict';
 
-	var _fetch_hints = __webpack_require__(2);
+	var _fetch_hints = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./fetch_hints.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _switch = __webpack_require__(3);
 
@@ -65,110 +65,7 @@
 	(0, _switch.initialize)();
 
 /***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	exports.placeHints = placeHints;
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function placeHints() {
-	  var source = "https://deermageddon.herokuapp.com/hints";
-	  var target_url = document.location.pathname;
-
-	  fetch(source + "?target_url=" + target_url, {
-	    method: 'get'
-	    // mode: 'no-cors'
-	  }).then(function (response) {
-	    return response.json();
-	  }).then(function (j) {
-	    var helpPoints = new HelpPoints(j);
-	    helpPoints.create();
-	    helpPoints.render();
-	  }).catch(function (err) {
-	    console.log(err);
-	  });
-	}
-
-	var HelpPoints = function () {
-	  function HelpPoints(hint_obj) {
-	    _classCallCheck(this, HelpPoints);
-
-	    this.hint_obj = hint_obj;
-	    this.hint_container = document.createElement("div");
-	  }
-
-	  _createClass(HelpPoints, [{
-	    key: "create",
-	    value: function create() {
-	      this.hint_container.setAttribute('id', 'hint-container');
-	      document.body.appendChild(this.hint_container);
-	      this._listen();
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      this.hint_container.innerHTML = "";
-	      this._createHelpPoints();
-	    }
-	  }, {
-	    key: "_listen",
-	    value: function _listen() {
-	      this.hint_container.addEventListener('click', function () {
-	        if (event.target.className === 'throb-heart') {
-	          event.target.classList.add('visible');
-	        } else if (event.target.className === 'text-box-close') {
-	          event.target.parentNode.previousElementSibling.classList.remove('visible');
-	        }
-	      });
-	    }
-	  }, {
-	    key: "_createHelpPoints",
-	    value: function _createHelpPoints() {
-	      for (var i = 0; i < this.hint_obj.length; i++) {
-	        var pulsate_parent = document.createElement("div");
-	        pulsate_parent.setAttribute("id", "pulsate-parent" + i);
-	        pulsate_parent.setAttribute("class", "pulsate-parent");
-
-	        var _calcParentPos2 = this._calcParentPos(this.hint_obj[i].target_selector);
-
-	        var _calcParentPos3 = _slicedToArray(_calcParentPos2, 2);
-
-	        var left = _calcParentPos3[0];
-	        var top = _calcParentPos3[1];
-
-	        pulsate_parent.setAttribute("style", "left:" + left + "px; top:" + top + "px;");
-	        pulsate_parent.innerHTML = "<div class=\"throbber\"></div>\n                                  <div class=\"throb-heart\"></div>\n                                  <div class=\"text-box\">\n                                    <div class=\"text-box-close\">X</div>\n                                    <p>" + this.hint_obj[i].hint + "</p>\n                                    <p><a href=\"http://deermageddon.herokuapp.com/articles/" + this.hint_obj[i].id + "\">Read more...</a></p>\n                                  </div>";
-
-	        var text_box = document.createElement("div");
-	        text_box.setAttribute("class", "pulsate-parent");
-	        this.hint_container.appendChild(pulsate_parent);
-	      }
-	    }
-	  }, {
-	    key: "_calcParentPos",
-	    value: function _calcParentPos(selector) {
-	      var hint_pos = document.querySelector(selector).getBoundingClientRect();
-	      var left = hint_pos.left + window.scrollX + hint_pos.width;
-	      var top = hint_pos.top + window.scrollY; //+ 10
-	      return [left, top];
-	    }
-	  }]);
-
-	  return HelpPoints;
-	}();
-
-/***/ },
+/* 2 */,
 /* 3 */
 /***/ function(module, exports) {
 
