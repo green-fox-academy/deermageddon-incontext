@@ -17,7 +17,7 @@ body.enable-help #hint-container{
   /*border-bottom: none!important;*/
   /*position: absolute;
   background-color: red;*/
-  z-index: 9999;
+  z-index: 9998;
 }
 .text-box{
   display: none;
@@ -32,7 +32,7 @@ body.enable-help #hint-container{
   -webkit-box-shadow: -1px 1px 13px 3px rgba(173,168,173,1);
   -moz-box-shadow: -1px 1px 13px 3px rgba(173,168,173,1);
   box-shadow: -1px 1px 13px 3px rgba(173,168,173,1);
-  z-index: 10000;
+  z-index: 9999;
 }
 
 .text-box-close{

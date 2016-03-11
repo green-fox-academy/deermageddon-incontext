@@ -71,8 +71,8 @@ label {
   border-radius: 2px;
   position: absolute;
   top: 0;
-  bottom: 45px;
-  right: 45px;
+  bottom: 0;
+  right: 44px;
   -moz-transition: all 0.3s ease-in 0s;
   -webkit-transition: all 0.3s ease-in 0s;
   -o-transition: all 0.3s ease-in 0s;
@@ -96,8 +96,8 @@ label {
   border-radius: 3px;
   position: absolute;
   top: 0;
-  bottom: 45px;
-  right: 45px;
+  bottom: 0;
+  right: 36px;
   -moz-transition: all 0.3s ease-in 0s;
   -webkit-transition: all 0.3s ease-in 0s;
   -o-transition: all 0.3s ease-in 0s;
@@ -106,8 +106,8 @@ label {
 
 .switch {
   position: fixed;
-  bottom: 0;
-  right:10px;
+  bottom: 45px;
+  right:25px;
   z-index: 9999;
 }
 
