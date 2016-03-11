@@ -57,7 +57,7 @@ class HelpPoints {
                                   <div class="text-box">
                                     <div class="text-box-close">X</div>
                                     <p>${this.hint_obj[i].hint}</p>
-                                    <p><a href="http://deermageddon.herokuapp.com/articles/${this.hint_obj[i].id target="_blank"}">Read more...</a></p>
+                                    <p><a href="http://deermageddon.herokuapp.com/articles/${this.hint_obj[i].id}">Read more...</a></p>
                                   </div>`
 
       let text_box = document.createElement("div")
